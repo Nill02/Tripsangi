@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #06B6D4;
+  --color-secondary: #7C3AED;
+  --color-accent: #1E40AF;
+
+  --color-surface: #ffffff;
+  --color-bg: #f7fafc;
+  --color-muted: #64748b; /* slate-500 */
+  --color-text: #0f172a; /* slate-900 */
+  --color-border: #e6edf3;
+
+  --color-success: #10b981;
+  --color-danger: #ef4444;
+  --color-warning: #f59e0b;
+  --color-info: #0ea5e9;
+}
+
+/* helper class for places where a brand gradient is needed */
+.brand-gradient {
+  background-image: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+}
+
+/* subtle default background to improve contrast */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* Re-usable button utilities (use in combination with Tailwind classes or by itself) */
+.btn {
+  @apply inline-flex items-center justify-center px-4 py-2 rounded-md font-medium transition-colors;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+}
+.btn-primary:hover {
+  opacity: 0.92;
+}
+
+.btn-secondary {
+  background-color: var(--color-secondary);
+  color: white;
+}
+.btn-secondary:hover {
+  opacity: 0.92;
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+/* dark theme overrides */
+.dark {
+  --color-bg: #071022; /* deep navy */
+  --color-surface: #071028; /* card surface */
+  --color-text: #e6eef6; /* light text */
+  --color-muted: #94a3b8;
+  --color-border: #0b1220;
+  --color-primary: #2dd4bf; /* brighter teal for contrast */
+}
+
+/* helpful utility classes */
+.bg-surface {
+  background-color: var(--color-surface);
+}
+.text-muted {
+  color: var(--color-muted);
+}
+.text-primary {
+  color: var(--color-primary);
+}
+
+/* small dark-mode tweak for ghost buttons */
+.dark .btn-ghost {
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
