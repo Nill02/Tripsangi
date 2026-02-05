@@ -1,4 +1,4 @@
-import Tourist from '../models/agency.js';
+import Tourist from '../models/Agency.js';
 
 export const createTourist = async (req, res) => {
   try {
@@ -38,3 +38,4 @@ export const deleteTourist = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
