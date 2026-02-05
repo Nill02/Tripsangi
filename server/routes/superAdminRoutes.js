@@ -1,7 +1,6 @@
 import express from 'express';
 import { protect } from '../middleware/auth.js';
 import User from '../models/UserModel.js';
-import Coupon from "../models/imp/coupon.js";
 import Order from '../models/imp/Order.js';
 
 const router = express.Router();
@@ -61,39 +60,6 @@ router.put('/admins/:id/status', protect, superAdminOnly, async (req, res) => {
   }
 });
 
-/* ==================== COUPON MANAGEMENT ==================== */
-
-// Create coupon
-router.post('/coupons', protect, superAdminOnly, async (req, res) => {
-  try {
-    const coupon = new Coupon(req.body);
-    await coupon.save();
-    res.status(201).json(coupon);
-  } catch (error) {
-    res.status(500).json({ message: 'Failed to create coupon' });
-  }
-});
-
-// Get all coupons
-router.get('/coupons', protect, superAdminOnly, async (req, res) => {
-  try {
-    const coupons = await Coupon.find();
-    res.json(coupons);
-  } catch (error) {
-    res.status(500).json({ message: 'Failed to fetch coupons' });
-  }
-});
-
-// Delete coupon
-router.delete('/coupons/:id', protect, superAdminOnly, async (req, res) => {
-  try {
-    await Coupon.findByIdAndDelete(req.params.id);
-    res.json({ message: 'Coupon deleted successfully' });
-  } catch (error) {
-    res.status(500).json({ message: 'Failed to delete coupon' });
-  }
-});
-
 /* ==================== ORDER / PAYMENT MANAGEMENT ==================== */
 
 // Get all orders (Hotel + Transport)
@@ -116,7 +82,10 @@ router.get('/orders/stats', protect, superAdminOnly, async (req, res) => {
     const orders = await Order.find();
 
     const totalAmount = orders.reduce((sum, o) => sum + (o.totalAmount || 0), 0);
-    const totalCommission = orders.reduce((sum, o) => sum + (o.commissionAmount || 0), 0);
+    const totalCommission = orders.reduce(
+      (sum, o) => sum + (o.commissionAmount || 0),
+      0
+    );
 
     res.json({
       totalOrders: orders.length,
@@ -129,8 +98,3 @@ router.get('/orders/stats', protect, superAdminOnly, async (req, res) => {
 });
 
 export default router;
-
-
-
-
-
