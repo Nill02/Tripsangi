@@ -2,7 +2,6 @@ import express from 'express';
 import { protect } from '../middleware/auth.js';
 import User from '../models/UserModel.js';
 import Coupon from "../models/imp/coupon.js";
-
 import Order from '../models/imp/Order.js';
 
 const router = express.Router();
@@ -130,6 +129,7 @@ router.get('/orders/stats', protect, superAdminOnly, async (req, res) => {
 });
 
 export default router;
+
 
 
 
