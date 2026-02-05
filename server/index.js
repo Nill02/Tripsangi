@@ -35,6 +35,7 @@ app.use(
     credentials: true,
   }),
 );
+app.get("/", (req, res) => res.send("Hello World"));
 
 // =====================
 // 🗄️ Database
@@ -74,3 +75,4 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
+
